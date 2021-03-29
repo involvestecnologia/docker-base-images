@@ -1,0 +1,26 @@
+env:
+  DOCKER_BUILDKIT: 1
+  REGISTRY: "registry.agilepromoter.com"
+
+steps:
+  - label: "Debian"
+    key: "debian"
+    env:
+      BASE_IMAGE: "debian:stable-slim"
+      IMAGE_NAME: "base-debian"
+    command:
+      - docker build --pull --no-cache --tag $$REGISTRY/$$IMAGE_NAME --build-arg BASE_IMAGE=$$BASE_IMAGE .
+      - docker push $$IMAGE_NAME
+    agents:
+      queue: "docker"
+
+  - label: "Node 14"
+    key: "node14"
+    env:
+      BASE_IMAGE: "node:14-stretch-slim"
+      IMAGE_NAME: "base-node14"
+    command:
+      - docker build --pull --no-cache --tag $$REGISTRY/$$IMAGE_NAME --build-arg BASE_IMAGE=$$BASE_IMAGE .
+      - docker push $$IMAGE_NAME
+    agents:
+      queue: "docker"
