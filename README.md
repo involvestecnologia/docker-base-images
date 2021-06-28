@@ -25,3 +25,4 @@ In your Dockefile in the `FROM` instruction add one of the base image which fits
 | - | - | - |
 | debian:stable-slim   | Static binaries (Ex.: go binaries) | registry.agilepromoter.com/base-debian |
 | node:14-stretch-slim | Applications that require node 14  | registry.agilepromoter.com/base-node14 |
+| node:16-stretch-slim | Applications that require node 16  | registry.agilepromoter.com/base-node16 |
