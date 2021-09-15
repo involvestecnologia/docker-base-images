@@ -17,7 +17,7 @@ steps:
   - label: "Node 14"
     key: "node14"
     env:
-      BASE_IMAGE: "node:14-stretch-slim"
+      BASE_IMAGE: "node:14-slim"
       IMAGE_NAME: "base-node14"
     command:
       - docker build --pull --no-cache --tag $$REGISTRY/$$IMAGE_NAME --build-arg BASE_IMAGE=$$BASE_IMAGE .
@@ -28,7 +28,7 @@ steps:
   - label: "Node 16"
     key: "node16"
     env:
-      BASE_IMAGE: "node:16-stretch-slim"
+      BASE_IMAGE: "node:16-slim"
       IMAGE_NAME: "base-node16"
     command:
       - docker build --pull --no-cache --tag $$REGISTRY/$$IMAGE_NAME --build-arg BASE_IMAGE=$$BASE_IMAGE .
