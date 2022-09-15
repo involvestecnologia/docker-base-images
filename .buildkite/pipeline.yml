@@ -38,7 +38,7 @@ steps:
       queue: "docker"
 
   - label: "Node 16 ECR"
-    key: "node16"
+    key: "node16ECR"
     env:
       BASE_IMAGE: "node:16-slim"
       IMAGE_NAME: "base-node16"
