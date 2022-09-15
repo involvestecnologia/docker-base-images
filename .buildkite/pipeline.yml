@@ -1,6 +1,7 @@
 env:
   DOCKER_BUILDKIT: 1
   REGISTRY: "registry.agilepromoter.com"
+  ECR_REGISTRY: "372153259551.dkr.ecr.us-east-1.amazonaws.com"
 
 steps:
   - label: "Debian"
@@ -35,3 +36,15 @@ steps:
       - docker push $$REGISTRY/$$IMAGE_NAME
     agents:
       queue: "docker"
+
+  - label: "Node 16 ECR"
+    key: "node16ECR"
+    env:
+      BASE_IMAGE: "node:16-slim"
+      IMAGE_NAME: "base-node16"
+    command:
+      - docker build --pull --no-cache --tag $$ECR_REGISTRY/$$IMAGE_NAME --build-arg BASE_IMAGE=$$BASE_IMAGE .
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 372153259551.dkr.ecr.us-east-1.amazonaws.com
+      - docker push $$ECR_REGISTRY/$$IMAGE_NAME
+    agents:
+      queue: "dockerecr"
